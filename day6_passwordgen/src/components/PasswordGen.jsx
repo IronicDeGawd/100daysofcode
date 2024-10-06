@@ -47,7 +47,7 @@ function PasswordGen() {
             value={password}
             ref={passRef}
           />
-          <button className="bg-blue-500 p-2 rounded-md" onClick={copyPwd()}>
+          <button className="bg-blue-500 p-2 rounded-md" onClick={copyPwd}>
             Copy
           </button>
         </div>
@@ -60,7 +60,6 @@ function PasswordGen() {
             min={6}
             max={24}
             value={length}
-            ref={passRef}
             onChange={(e) => {
               setLength(e.target.value);
             }}

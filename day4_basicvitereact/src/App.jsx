@@ -15,7 +15,7 @@ function App() {
     <>
      <h1>Basic React App</h1>
      <h3>Counter : {number}</h3>
-     <button onClick={addNumber}>Add Number</button>
+     <button onClick={addNumber}>Add Number</button>{"  "}
      <button onClick={decNumber}>Decrease Number</button>
     </>
   )
