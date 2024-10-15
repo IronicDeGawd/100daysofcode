@@ -6,11 +6,13 @@ function useWeather(lat, lon) {
 
   useEffect(() => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res);
-      });
+    if (lat) {
+      fetch(url)
+        .then((res) => res.json())
+        .then((res) => {
+          setData(res);
+        });
+    }
   }, [lat, lon]);
   return data;
 }
