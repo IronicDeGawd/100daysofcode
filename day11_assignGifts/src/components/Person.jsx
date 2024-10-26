@@ -1,4 +1,5 @@
 // import React from "react";
+/* eslint-disable react/prop-types */
 
 function Person({ id, name, gift = "Not Assigned", handleDelete }) {
   return (
