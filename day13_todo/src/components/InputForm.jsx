@@ -20,7 +20,7 @@ function InputForm({ handleAddTask, handleClearField }) {
 
   return (
     <>
-      <div className="flex flex-col m-2 gap-2 w-5/6">
+      <div className="flex flex-col m-2 gap-1 w-5/6">
         <div className="relative">
           <input
             maxLength={40}
@@ -30,10 +30,10 @@ function InputForm({ handleAddTask, handleClearField }) {
             }}
             type="text"
             ref={titleRef}
-            className=" w-full pr-16  px-3 py-3 border-2 border-slate-600 rounded-2xl shadow-violet-300 shadow-md"
+            className="mb-2 w-full pr-16  px-3 py-3 border-1 border-slate-600 rounded-2xl shadow-violet-300 shadow-md"
             placeholder="Enter Task Title"
           ></input>
-          <span className="absolute right-3 text-slate-600 translate-y-3 ">
+          <span className="absolute right-3 text-slate-400 translate-y-3 ">
             {title.length}/40
           </span>
         </div>
@@ -45,33 +45,39 @@ function InputForm({ handleAddTask, handleClearField }) {
             }}
             onChange={(e) => handleDetailChange(e)}
             ref={detailRef}
-            className="w-full pr-16 px-3 py-3 border-2 border-slate-600 rounded-2xl shadow-violet-300 shadow-md"
+            className="w-full pr-16 px-3 py-3 border-1 border-slate-600 rounded-2xl shadow-violet-300 shadow-md"
             placeholder="Enter Task Details"
           ></textarea>
-          <span className="absolute  right-3 text-slate-600 translate-y-3 ">
+          <span className="absolute right-3 text-slate-400 translate-y-3 ">
             {detail.length}/500
           </span>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-1">
           <input
             type="text"
             ref={timeRef}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
             placeholder="Deadline Time"
-            className="sm:w-2/4 p-4 border-2 border-slate-600 rounded-2xl shadow-violet-300 shadow-md"
+            className="w-full sm:2/4 px-4 py-4 border-1 mb-2 border-slate-600 rounded-2xl shadow-violet-300 shadow-md"
           ></input>
           <button
             onClick={() => {
               handleAddTask(titleRef, detailRef, timeRef);
+              setDetail("");
+              setTitle("");
             }}
-            className="sm:w-1/4 w-4/4 font-semibold px-3 py-3 border-2 bg-slate-500 text-slate-200 border-slate-600 rounded-2xl shadow-violet-500 shadow-md transition duration-300 hover:bg-slate-700 hover:text-slate-200"
+            className="sm:w-1/4 w-4/4 font-semibold px-3 py-3 border-1 bg-slate-500 text-slate-200 border-slate-600 rounded-2xl shadow-violet-500 shadow-md transition duration-300 hover:bg-slate-700 hover:text-slate-200"
           >
             Add Task
           </button>
           <button
-            onClick={() => handleClearField(titleRef, detailRef, timeRef)}
-            className="sm:w-1/4 w-4/4 hidden sm:block font-semibold px-3 py-3 border-2 border-slate-600 rounded-2xl bg-slate-500 text-slate-50 shadow-violet-300 shadow-md transition duration-300 hover:bg-slate-700 hover:text-slate-200"
+            onClick={() => {
+              handleClearField(titleRef, detailRef, timeRef);
+              setDetail("");
+              setTitle("");
+            }}
+            className="sm:w-1/4 w-4/4 hidden sm:block font-semibold px-3 py-3 border-1 border-slate-600 rounded-2xl bg-slate-500 text-slate-50 shadow-violet-300 shadow-md transition duration-300 hover:bg-slate-700 hover:text-slate-200"
           >
             Clear Input
           </button>

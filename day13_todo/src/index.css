@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Gloria';
+    src: url('/fonts/Gloria/Gloria-Regular.ttf') format('truetype');
+    font-weight: 400;
+    }
+
+p,h5,div {
+    @apply font-primary;
+}
+span {
+    @apply font-mono
+}

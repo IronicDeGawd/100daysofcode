@@ -82,11 +82,11 @@ function App() {
             handleClearField={handleClearField}
           />
         </div>
-        <hr className="border-2 mt-5 mb-5 border-opacity-60 w-4/5 rounded-md shadow-sm shadow-violet-300 border-slate-600" />
+        <hr className="border-1 mt-1 mb-3 border-opacity-60 w-4/5 rounded-md shadow-sm shadow-violet-300 border-slate-600" />
 
         <div
           id="task-cards"
-          className="w-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center"
+          className="w-screen grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center"
         >
           {tasks &&
             tasks.map((task, index) => (
