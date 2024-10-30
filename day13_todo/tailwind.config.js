@@ -5,12 +5,16 @@ export default {
     extend: {
       fontSize: {
         xxs: "0.5rem",
+        xms: "0.6rem",
+      },
+      lineHeight: {
+        xms: "1rem",
       },
       borderWidth: {
         1: "1px",
       },
       width: {
-        "9/10": "97%",
+        "9/10": "90%",
       },
       fontFamily: {
         primary: "Gloria",

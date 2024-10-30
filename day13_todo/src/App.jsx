@@ -9,18 +9,16 @@ function App() {
   // const [tasks, setTasks] = useState([]);
 
   const [tasks, setTasks] = useState(() => {
-    // Initialize state from local storage
+    // initialize state from local storage
     const storedTasks = localStorage.getItem("taskDetails");
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
 
-  const time = useCurrentDate();
+  // for validating input field title and deadline
+  const [isTitleValid, setTitleValid] = useState(true);
+  const [isDeadlineValid, setDeadlineValid] = useState(true);
 
-  const handleClearField = (titleRef, detailRef, timeRef) => {
-    titleRef.current.value = "";
-    detailRef.current.value = "";
-    timeRef.current.value = "";
-  };
+  const time = useCurrentDate();
 
   useEffect(() => {
     localStorage.setItem("taskDetails", JSON.stringify(tasks));
@@ -37,30 +35,33 @@ function App() {
   const handleAddTask = (titleRef, detailRef, timeRef) => {
     let title = titleRef.current.value;
     let details = detailRef.current.value;
-    let deadline = timeRef.current.value;
+    let deadline = timeRef?.current.value || 0;
     let timeNow = time[1];
     let currTime = time[0];
     let deadlineTime = Date.parse(deadline);
 
-    // console.log(deadline);
-
-    if (deadlineTime >= currTime) {
-      if (title && details && deadline) {
-        setTasks((prev) => [
-          {
-            title: title,
-            details: details,
-            deadline: deadline,
-            time: timeNow,
-            markdone: false,
-          },
-          ...prev,
-        ]);
-        titleRef.current.value = "";
-        detailRef.current.value = "";
-        timeRef.current.value = "";
-      }
-    } else alert("Deadline time cannot be less than current time");
+    // console.log(deadlineTime, currTime, deadline);
+    if (title.length <= 0) {
+      setTitleValid(false);
+    } else if (deadlineTime < currTime) {
+      setDeadlineValid(false);
+    } else {
+      setTasks((prev) => [
+        {
+          title: title,
+          details: details,
+          deadline: deadline,
+          time: timeNow,
+          markdone: false,
+        },
+        ...prev,
+      ]);
+      setDeadlineValid(true);
+      setTitleValid(true);
+      titleRef.current.value = "";
+      detailRef.current.value = "";
+      timeRef.current.value = "";
+    }
   };
 
   const handleDeleteTask = (index) => {
@@ -70,23 +71,25 @@ function App() {
 
   return (
     <>
-      <div className="bg-slate-300 overflow-x-hidden w-screen items-center justify-start h-screen overflow-y-auto flex flex-col">
+      <div className="bg-gray-100 font-primary font-semibold overflow-x-hidden w-screen items-center justify-start h-screen overflow-y-auto flex flex-col">
         <div
           id="input"
           className="flex flex-col w:3/4 sm:w-2/4 items-center gap-5 my-5"
         >
-          <p className="font-bold text-5xl text-gray-700 top-10">To Do</p>
+          <p className="font-bold text-5xl text-gray-800 top-10">To Do</p>
 
           <InputForm
             handleAddTask={handleAddTask}
-            handleClearField={handleClearField}
+            isTitleValid={isTitleValid}
+            isDeadlineValid={isDeadlineValid}
+            setTitleValid={setTitleValid}
           />
         </div>
         <hr className="border-1 mt-1 mb-3 border-opacity-60 w-4/5 rounded-md shadow-sm shadow-violet-300 border-slate-600" />
 
         <div
           id="task-cards"
-          className="w-screen grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center p-2 gap-2"
         >
           {tasks &&
             tasks.map((task, index) => (
