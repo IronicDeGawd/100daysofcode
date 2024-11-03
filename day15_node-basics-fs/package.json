@@ -1,0 +1,19 @@
+{
+  "name": "day15_node-basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IronicDeGawd/100daysofcode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IronicDeGawd/100daysofcode/issues"
+  },
+  "homepage": "https://github.com/IronicDeGawd/100daysofcode#readme"
+}
