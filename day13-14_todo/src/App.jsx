@@ -87,21 +87,27 @@ function App() {
         </div>
         <hr className="border-1 mt-1 mb-3 border-opacity-60 w-4/5 rounded-md shadow-sm shadow-violet-300 border-slate-600" />
 
-        <div
-          id="task-cards"
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center p-2 gap-2"
-        >
-          {tasks &&
-            tasks.map((task, index) => (
-              <TaskCard
-                key={index}
-                tasks={task}
-                index={index}
-                handleMarkDone={handleMarkDone}
-                handleDeleteTask={handleDeleteTask}
-              />
-            ))}
-        </div>
+        {tasks.length ? (
+          <div
+            id="task-cards"
+            className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center p-2 gap-2"
+          >
+            {tasks &&
+              tasks.map((task, index) => (
+                <TaskCard
+                  key={index}
+                  tasks={task}
+                  index={index}
+                  handleMarkDone={handleMarkDone}
+                  handleDeleteTask={handleDeleteTask}
+                />
+              ))}
+          </div>
+        ) : (
+          <div>
+            <i className="text-gray-500 text-center">No Tasks Added Yet!</i>
+          </div>
+        )}
       </div>
     </>
   );
