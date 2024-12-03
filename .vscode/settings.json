@@ -3,5 +3,8 @@
     "glassit.step": 5,
     "cSpell.words": [
         "Aditya"
+    ],
+    "cSpell.ignoreWords": [
+        "Amountchange"
     ]
 }
