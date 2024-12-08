@@ -1,1 +1,0 @@
-A project to assign random gifts to random peeps.
