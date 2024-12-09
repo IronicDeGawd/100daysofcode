@@ -33,7 +33,6 @@ function App() {
   async function handleSearch(anime) {
     const searchURL = import.meta.env.VITE_APP_URL;
     const url = searchURL + anime + "/1";
-    console.log(import.meta.env.VITE_APP_URL);
 
     if (anime != " ") {
       try {
@@ -87,7 +86,7 @@ function App() {
         ""
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 w-full max-w-5xl">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-8 w-full max-w-7xl">
         {resArray &&
           resArray.map((data, index) => (
             <AnimeSearchList key={index} data={data} index={index} />
