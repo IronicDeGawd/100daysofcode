@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router";
 
-export default function AnimeSearchList({ data, index }) {
+export default function AnimeList({ data, index }) {
   const url = data.link_url;
   const redirectUrl = url.replace(/\d+/g, "") + "1";
   return (

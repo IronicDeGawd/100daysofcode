@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-export default function SearchedFor({ anime, error }) {
+export default function SearchedFor({ animeSearch, error }) {
   return (
     <>
       <div className="mt-6 text-xl font-semibold text-white">
-        You searched for: <span className="font-bold">{anime}</span>
+        You searched for: <span className="font-bold">{animeSearch}</span>
       </div>
       {error && error ? (
         <div className="mt-6 text-xl font-semibold text-white">

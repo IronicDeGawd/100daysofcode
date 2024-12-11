@@ -1,14 +1,17 @@
 import "dotenv";
 import { useRef, useState, useEffect } from "react";
-import AnimeSearchList from "./components/AnimeSearchList";
-import SearchInput from "./components/SearchInput";
-import SearchedFor from "./components/SearchedFor";
+import { Routes, Route, useNavigate } from "react-router";
+import Home from "./pages/Home/Home.jsx";
+import Anime from "./pages/Anime/Anime.jsx";
+import Layout from "./pages/Layout/Layout.jsx";
 
-function App() {
-  const [anime, setAnime] = useState();
+export default function App() {
+  const [animeSearch, setAnime] = useState();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [trending, setTrending] = useState([]);
   const [resArray, setRes] = useState([]);
+  const navigate = useNavigate();
 
   const animeSearchRef = useRef(null);
 
@@ -25,18 +28,19 @@ function App() {
     if (e.key === "Enter") {
       setError(false);
       handleClick();
+      navigate("/");
     }
   };
 
   //http://localhost:2000/api/anime/bleach -> using a proxy server running on node to search for the anime data on the external api
 
-  async function handleSearch(anime) {
+  async function handleSearch(animeSearch) {
     const ProxyUrl = import.meta.env.VITE_API_URL;
 
-    if (anime != " ") {
+    if (animeSearch != " ") {
       try {
         // const url = "http://localhost:2000/api/anime/" + anime + "/1";
-        const url = ProxyUrl + anime + "/1";
+        const url = ProxyUrl + animeSearch + "/1";
         const res = await fetch(url);
         const data = await res.json();
 
@@ -46,7 +50,7 @@ function App() {
 
         if (data.length != 0) {
           setLoading(false);
-          setRes(data);
+          setTrending(data);
         } else {
           setLoading(false);
           setError(true);
@@ -59,42 +63,61 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    if (anime) {
-      handleSearch(anime);
+  async function handleTrending() {
+    const TrendingUrl = import.meta.env.VITE_API_TRENDING_URL;
+    try {
+      const res = await fetch(TrendingUrl);
+      const data = await res.json();
+      if (data.length != 0) {
+        setLoading(false);
+        setTrending(data);
+      } else {
+        setLoading(false);
+        setError(true);
+      }
+    } catch (error) {
+      setError(true);
+      setLoading(false);
+      console.log(error + "; No results found");
     }
-  }, [anime]);
+  }
+
+  useEffect(() => {
+    handleTrending();
+  }, []);
+
+  useEffect(() => {
+    if (animeSearch) {
+      handleSearch(animeSearch);
+    }
+  }, [animeSearch]);
 
   return (
-    <div className="min-h-screen bg-purple-950 flex flex-col items-center p-6 text-gray-800">
-      <SearchInput
-        handleClick={handleClick}
-        handleEnter={handleEnter}
-        animeSearchRef={animeSearchRef}
-      />
-
-      {anime && <SearchedFor anime={anime} error={error} />}
-      {loading ? (
-        <div className="mt-20 text-center text-xl font-semibold text-white">
-          <img
-            style={{ mixBlendMode: "hard-light" }}
-            className="w-28 h-28 rounded-full overflow-hidden"
-            src="/loadingoptimize.gif"
-          ></img>
-          <div className="mt-8">Loading ...</div>
-        </div>
-      ) : (
-        ""
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 w-full max-w-5xl">
-        {resArray &&
-          resArray.map((data, index) => (
-            <AnimeSearchList key={index} data={data} index={index} />
-          ))}
-      </div>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Layout
+            handleClick={handleClick}
+            handleEnter={handleEnter}
+            animeSearchRef={animeSearchRef}
+          />
+        }
+      >
+        <Route
+          index
+          element={
+            <Home
+              animeSearch={animeSearch}
+              loading={loading}
+              error={error}
+              resArray={resArray}
+              trending={trending}
+            />
+          }
+        ></Route>
+        <Route path="/:anime" element={<Anime />}></Route>
+      </Route>
+    </Routes>
   );
 }
-
-export default App;
