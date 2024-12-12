@@ -12,15 +12,17 @@ export default function AnimeEmbed({ embedURL }) {
   return (
     <>
       {isLoading && <Loading />}
-      <iframe
-        className={`w-full md:w-3/4 h-[40vh] sm:h-[60vh] rounded-lg shadow-lg border-2 border-purple-600 ${
-          isLoading ? "invisible" : ""
-        }`}
-        src={embedURL}
-        allowFullScreen
-        frameBorder="0"
-        onLoad={handleLoad}
-      ></iframe>
+      <div className="relative w-full sm:w-3/5 pb-[57.25%] sm:pb-[33.9%]">
+        <iframe
+          className={`absolute top-0 left-0 w-full h-full rounded-lg shadow-lg border-2 border-purple-600 ${
+            isLoading ? "invisible" : ""
+          }`}
+          src={embedURL}
+          allowFullScreen
+          frameBorder="0"
+          onLoad={handleLoad}
+        ></iframe>
+      </div>
     </>
   );
 }

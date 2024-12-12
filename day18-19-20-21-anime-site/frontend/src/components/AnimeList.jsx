@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function AnimeList({ data, index }) {
   const url = data.link_url;
-  const redirectUrl = url.replace(/\d+/g, "") + "1";
+
   return (
     <>
       <div
@@ -21,7 +21,7 @@ export default function AnimeList({ data, index }) {
           </h3>
           <p className="text-sm text-gray-300">Episodes: {data.episode}</p>
           <button className="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-purple-700 transition-all">
-            <Link to={"/" + redirectUrl}>Watch Now</Link>
+            <Link to={"/" + url}>Watch Now</Link>
           </button>
         </div>
       </div>
