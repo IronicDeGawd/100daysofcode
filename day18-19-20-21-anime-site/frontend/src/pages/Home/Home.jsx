@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Loading from "../../components/Loading";
-import AnimeArray from "../../components/AnimeArray";
+import Loading from "../../components/common/Loading";
+import AnimeGrid from "../../components/AnimeHandler/AnimeGrid";
 
 function Home() {
   const [loadingTrending, setLoadingTrending] = useState(true);
@@ -32,7 +32,7 @@ function Home() {
         Popular Anime
       </div>
       {loadingTrending ? <Loading /> : ""}
-      <AnimeArray resArray={trending} />
+      <AnimeGrid resArray={trending} />
     </>
   );
 }

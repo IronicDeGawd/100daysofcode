@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import SearchedFor from "../../components/SearchedFor";
-import Loading from "../../components/Loading";
-import AnimeArray from "../../components/AnimeArray";
+import Loading from "../../components/common/Loading";
+import AnimeGrid from "../../components/AnimeHandler/AnimeGrid";
 
 export default function Search() {
   const [error, setError] = useState(false);
@@ -51,7 +51,7 @@ export default function Search() {
     <>
       {anime && <SearchedFor animeSearch={anime} error={error} />}
       {loading ? <Loading /> : ""}
-      {resArray && <AnimeArray resArray={resArray} />}
+      {resArray && <AnimeGrid resArray={resArray} />}
     </>
   );
 }

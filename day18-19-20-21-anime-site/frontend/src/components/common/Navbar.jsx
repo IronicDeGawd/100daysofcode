@@ -1,16 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Link, NavLink } from "react-router";
-import SearchInput from "./SearchInput";
+import SearchInput from "../SearchInput";
 
 export default function Navbar({ handleClick, handleEnter, animeSearchRef }) {
   return (
     <div className="w-full bg-opacity-20 p-3 flex flex-col md:flex-row justify-between items-center gap-2 border-2 rounded-md border-purple-700 shadow-md bg-gradient-to-r from-violet-800 to-purple-800">
       <Link className="flex flex-col sm:flex-row items-center gap-3" to="/">
-        <img
-          className="w-16 h-16 sm:w-20 sm:h-20"
-          src="./nezukoTV.png"
-          alt="Logo"
-        />
+        <img className="w-16 sm:w-20 sm:h-20" src="./logo.png" alt="Logo" />
         <p className="text-3xl sm:text-4xl text-gray-200 font-semibold text-center">
           nezukoTV
         </p>

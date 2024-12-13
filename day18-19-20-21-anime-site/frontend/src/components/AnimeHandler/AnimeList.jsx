@@ -20,9 +20,11 @@ export default function AnimeList({ data, index }) {
             {data.title}
           </h3>
           <p className="text-sm text-gray-300">Episodes: {data.episode}</p>
-          <button className="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-purple-700 transition-all">
-            <Link to={"/" + url}>Watch Now</Link>
-          </button>
+          <Link to={"/" + url}>
+            <button className="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-purple-700 transition-all">
+              Watch Now
+            </button>
+          </Link>
         </div>
       </div>
     </>
