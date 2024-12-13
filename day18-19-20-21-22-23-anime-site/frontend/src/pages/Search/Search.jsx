@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import SearchedFor from "../../components/SearchedFor";
@@ -14,13 +15,18 @@ export default function Search() {
   async function handleSearch(animeSearch) {
     setRes([]);
     const ProxyUrl = import.meta.env.VITE_API_URL;
+    const Api = import.meta.env.VITE_API_KEY;
 
     if (animeSearch != " ") {
       try {
         // const url = "http://localhost:2000/api/anime/" + anime + "/1";
         const url = ProxyUrl + animeSearch + "/1";
-        const res = await fetch(url);
-        const data = await res.json();
+        const res = await axios.get(url, {
+          headers: {
+            "x-api-key": Api,
+          },
+        });
+        const data = res.data;
 
         //after setting the response in data, we'll check if we are getting a valid response from the server/
         // "" -> means it wasnt able to find any relevant data, so we'll check for length of data and setError to true to display the relevant message/

@@ -9,10 +9,15 @@ export default function EpisodeInfo({ anime }) {
 
   useEffect(() => {
     const url = import.meta.env.VITE_API_EPISODE_URL;
+    const Api = import.meta.env.VITE_API_KEY;
 
     const handleEpisode = async () => {
       try {
-        const response = await axios.get(url + anime);
+        const response = await axios.get(url + anime, {
+          headers: {
+            "x-api-key": Api,
+          },
+        });
         const episodes = response.data;
         setEpisode(episodes);
       } catch (error) {

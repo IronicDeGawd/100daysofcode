@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Loading from "../../components/common/Loading";
 import AnimeGrid from "../../components/AnimeHandler/AnimeGrid";
@@ -8,10 +9,16 @@ function Home() {
 
   async function handleTrending() {
     const TrendingUrl = import.meta.env.VITE_API_TRENDING_URL;
+    const Api = import.meta.env.VITE_API_KEY;
+
     try {
-      const res = await fetch(TrendingUrl);
-      const data = await res.json();
-      if (data.length != 0) {
+      const response = await axios.get(TrendingUrl, {
+        headers: {
+          "x-api-key": Api,
+        },
+      });
+      const data = response.data;
+      if (data.length !== 0) {
         setLoadingTrending(false);
         setTrending(data);
       } else {
@@ -31,7 +38,7 @@ function Home() {
       <div className="text-white font-semibold text-4xl mt-6 ">
         Popular Anime
       </div>
-      {loadingTrending ? <Loading /> : ""}
+      {loadingTrending && <Loading />}
       <AnimeGrid resArray={trending} />
     </>
   );
