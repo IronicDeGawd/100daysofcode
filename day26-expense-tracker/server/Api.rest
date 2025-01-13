@@ -1,0 +1,22 @@
+POST http://localhost:8000/register
+content-type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "test1234@"
+}
+###
+
+GET http://localhost:8000/login
+content-type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "test1234@"
+}
+###
+
+GET http://localhost:8000/me
+###
+
+GET http://localhost:8000/logout
